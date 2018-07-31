@@ -1,7 +1,9 @@
 # front-end-spring-security
-# FrontEndSpringSecurity
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
+ 
+ Node version : v10.6.0
+ Node version : 6.1.0
 
 ## Development server
 
