@@ -31,8 +31,8 @@ export class ProfileComponent implements OnInit {
         console.log('before response : ' );
         console.log(response );
         console.log('before response : ' );
-        let data = response._body;
-        console.log(data);
+      
+        console.log(response);
       }
     });
   }

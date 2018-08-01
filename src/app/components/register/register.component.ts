@@ -7,6 +7,10 @@ import { Observable, Subject, pipe } from 'rxjs';
 // operators all come from `rxjs/operators`
 import { map, takeUntil, tap } from 'rxjs/operators';
 
+import { DialogService } from 'ng2-bootstrap-modal';
+import { ConfirmComponent } from '../util/confirm/confirm.component';
+
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -17,7 +21,7 @@ export class RegisterComponent implements OnInit {
   user: User = new User();
   errorMessage: string;
 
-  constructor(public accountService: AccountService, public router: Router) {
+  constructor(public accountService: AccountService, public router: Router, private dialogService: DialogService) {
   }
 
   ngOnInit() {
@@ -25,9 +29,32 @@ export class RegisterComponent implements OnInit {
 
   register() {
     this.accountService.createAccount(this.user).subscribe((data: User) => {
-      console.log('Value is', data);
+
       this.user = data;
-      this.router.navigate(['/login']);
+      let disposable = this.dialogService.addDialog(ConfirmComponent, {
+        title: 'Confirmación',
+        message: 'Usuario ha sido creado satisfactoriamente',
+        alertType : true
+      })
+        .subscribe((isConfirmed) => {
+          //We get dialog result
+          if (isConfirmed) {
+            alert('accepted');
+            this.router.navigate(['/login']);
+          }
+          else {
+            alert('declined');
+            this.router.navigate(['/login']);
+          }
+        });
+      setTimeout(() => {
+        disposable.unsubscribe();
+        this.router.navigate(['/login']);
+      }, 10000);
+      //just with alert message
+      //  alert('Usuario ha sido creado satisfactoriamente', );
+      //  this.router.navigate(['/login']);
+      
     });
   }
 }
