@@ -40,10 +40,9 @@ export class LoginComponent implements OnInit {
         console.log(data);
         // store user details  in local storage to keep user logged in between page refreshes
         localStorage.setItem('tokenAppScheduler', JSON.stringify(data.token));
-
         localStorage.setItem('currentUser', JSON.stringify(data.userDetails));
-
         this.router.navigate(['/profile']);
+
 
 
       } else {

@@ -28,10 +28,10 @@ export class ProfileComponent implements OnInit {
     this.authService.greet(this.currentUser.fullName).subscribe((response: Response) => {
       console.log('before response');
       if (response.status === 200) {
-        console.log('before response : ' );
-        console.log(response );
-        console.log('before response : ' );
-      
+        console.log('before response : ');
+        console.log(response);
+        console.log('before response : ');
+
         console.log(response);
       }
     });
@@ -39,16 +39,17 @@ export class ProfileComponent implements OnInit {
 
   // login out from the app
   logOut() {
-  
-    localStorage.removeItem('currentUser');
-    localStorage.removeItem('tokenAppScheduler');
-    this.authService.logOut()
-      .subscribe(
-        data => {
-          this.router.navigate(['/login']);
-        },
-        error => {
 
-        });
+   
+    localStorage.clear();
+    this.router.navigate(['/login']);
+    /* this.authService.logOut()
+       .subscribe(
+         data => {
+           this.router.navigate(['/login']);
+         },
+         error => {
+ 
+         });*/
+   }
   }
-}
